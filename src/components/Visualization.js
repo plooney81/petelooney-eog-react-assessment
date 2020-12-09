@@ -6,6 +6,8 @@ import { measurementDataError, measurements, setPossibleMetrics } from '../redux
 import AddMetric from './AddMetric';
 import Chart from './Chart';
     export default function Visualization() {
+    const afterTime = Date.now() - 10 * 60000;
+    
     const dispatch = useDispatch();
         const client = createClient({
             url: 'https://react.eogresources.com/graphql'
@@ -27,27 +29,27 @@ import Chart from './Chart';
         const input = [
                 {
                   "metricName": "oilTemp",
-                  "after": 1607551526841
+                  "after": afterTime
                 }, 
                 {
                   "metricName": "tubingPressure",
-                  "after": 1607551526841
+                  "after": afterTime
                 },
                 {
                   "metricName": "casingPressure",
-                  "after": 1607551526841
+                  "after": afterTime
                 },
                 {
                   "metricName": "waterTemp",
-                  "after": 1607551526841
+                  "after": afterTime
                 },
                 {
                   "metricName": "injValveOpen",
-                  "after": 1607551526841
+                  "after": afterTime
                 },
                 {
                   "metricName": "flareTemp",
-                  "after": 1607551526841
+                  "after": afterTime
                 }
         ]
 
@@ -82,7 +84,7 @@ import Chart from './Chart';
 
         return (
           <Provider value={client}>
-              <Metrics>Something</Metrics>
+              <Metrics/>
           </Provider>
       )
 
