@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Provider, createClient, useQuery } from 'urql';
 import { measurementDataError, measurements, setPossibleMetrics } from '../redux/actions';
 import AddMetric from './AddMetric';
+import Chart from './Chart';
     export default function Visualization() {
     const dispatch = useDispatch();
         const client = createClient({
@@ -25,22 +26,28 @@ import AddMetric from './AddMetric';
         `
         const input = [
                 {
-                  "metricName": "oilTemp"
+                  "metricName": "oilTemp",
+                  "after": 1607484162986
                 }, 
                 {
-                  "metricName": "tubingPressure"
+                  "metricName": "tubingPressure",
+                  "after": 1607484162986
                 },
                 {
-                  "metricName": "casingPressure"
+                  "metricName": "casingPressure",
+                  "after": 1607484162986
                 },
                 {
-                  "metricName": "waterTemp"
+                  "metricName": "waterTemp",
+                  "after": 1607484162986
                 },
                 {
-                  "metricName": "injValveOpen"
+                  "metricName": "injValveOpen",
+                  "after": 1607484162986
                 },
                 {
-                  "metricName": "flareTemp"
+                  "metricName": "flareTemp",
+                  "after": 1607484162986
                 }
         ]
 
@@ -68,6 +75,7 @@ import AddMetric from './AddMetric';
           return (
             <div>
               <AddMetric/>
+              <Chart/>
             </div>
           );
         }
