@@ -1,4 +1,3 @@
-import { CardActionArea } from "@material-ui/core";
 import { combineReducers } from "redux";
 import { ADD_METRIC, REMOVE_METRIC, SET_MEASUREMENTS, SET_MEASUREMENT_DATA_ERROR, SET_POSSIBLE_METRICS } from "./actions";
 

@@ -1,11 +1,10 @@
 import { TimeSeries } from 'pondjs';
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import {Charts, ChartContainer, ChartRow, YAxis, LineChart, Legend } from "react-timeseries-charts";
-import { styler } from "react-timeseries-charts";
+import {Charts, ChartContainer, ChartRow, YAxis, LineChart } from "react-timeseries-charts";
+// import { styler } from "react-timeseries-charts";
 
 export default function Chart() {
-    const {current} = useSelector(state => state.metrics);
     const {data} = useSelector(state => state.measurements)
     let tempSeries = null;
     let oilTempSeries = null;
@@ -115,14 +114,14 @@ export default function Chart() {
         injectionValveOpenSeries = new TimeSeries(injectionValveOpenData)
     }
     
-    const chartStyler = styler([
-        {key: 'oilTemp', color: "#f2d974", width: 5},
-        {key: 'tubingPressure', color: "#c7956d", width: 5},
-        {key: 'casingPressure', color: '#965d62', width: 5},
-        {key: 'waterTemp', color: '#534e52', width: 5},
-        {key: 'injValveOpen', color: '#999b84', width: 5},
-        {key: 'flareTemp', color: '#f4eeed', width: 5}
-    ]);
+    // const chartStyler = styler([
+    //     {key: 'oilTemp', color: "#f2d974", width: 5},
+    //     {key: 'tubingPressure', color: "#c7956d", width: 5},
+    //     {key: 'casingPressure', color: '#965d62', width: 5},
+    //     {key: 'waterTemp', color: '#534e52', width: 5},
+    //     {key: 'injValveOpen', color: '#999b84', width: 5},
+    //     {key: 'flareTemp', color: '#f4eeed', width: 5}
+    // ]);
 
     return (
         <>

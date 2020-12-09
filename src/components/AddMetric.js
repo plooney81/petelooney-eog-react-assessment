@@ -6,7 +6,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { Icon, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import { addMetric, removeMetric } from '../redux/actions';
 import DeleteIcon from '@material-ui/icons/Delete';
 
