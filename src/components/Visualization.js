@@ -1,8 +1,9 @@
-import { Chip, LinearProgress } from '@material-ui/core';
+import { LinearProgress } from '@material-ui/core';
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { Provider, createClient, useQuery } from 'urql';
-import { measurementDataError, measurements } from '../redux/actions';
+import { measurementDataError, measurements, setPossibleMetrics } from '../redux/actions';
+import AddMetric from './AddMetric';
     export default function Visualization() {
     const dispatch = useDispatch();
         const client = createClient({
@@ -58,16 +59,22 @@ import { measurementDataError, measurements } from '../redux/actions';
               }
               if(!data) return;
               const {getMultipleMeasurements} = data;
+              const metricNames = getMultipleMeasurements.map(measurement => measurement.metric)
               dispatch(measurements(getMultipleMeasurements));
-          }, [dispatch, data, error])
+              dispatch(setPossibleMetrics(metricNames))
+          }, [data, error])
 
           if(fetching) return <LinearProgress></LinearProgress>;
-          return <Chip label={`Something`} />;
+          return (
+            <div>
+              <AddMetric/>
+            </div>
+          );
         }
 
         return (
           <Provider value={client}>
-              <Metrics></Metrics>
+              <Metrics>Something</Metrics>
           </Provider>
       )
 
