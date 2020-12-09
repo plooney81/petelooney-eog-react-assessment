@@ -27,27 +27,27 @@ import Chart from './Chart';
         const input = [
                 {
                   "metricName": "oilTemp",
-                  "after": 1607484162986
+                  "after": 1607551526841
                 }, 
                 {
                   "metricName": "tubingPressure",
-                  "after": 1607484162986
+                  "after": 1607551526841
                 },
                 {
                   "metricName": "casingPressure",
-                  "after": 1607484162986
+                  "after": 1607551526841
                 },
                 {
                   "metricName": "waterTemp",
-                  "after": 1607484162986
+                  "after": 1607551526841
                 },
                 {
                   "metricName": "injValveOpen",
-                  "after": 1607484162986
+                  "after": 1607551526841
                 },
                 {
                   "metricName": "flareTemp",
-                  "after": 1607484162986
+                  "after": 1607551526841
                 }
         ]
 

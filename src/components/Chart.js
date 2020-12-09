@@ -2,7 +2,7 @@ import { TimeSeries } from 'pondjs';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import {Charts, ChartContainer, ChartRow, YAxis, LineChart } from "react-timeseries-charts";
-// import { styler } from "react-timeseries-charts";
+import { styler, Legend } from "react-timeseries-charts";
 
 export default function Chart() {
     const {data} = useSelector(state => state.measurements)
@@ -24,7 +24,7 @@ export default function Chart() {
         //oil temperature section
         const oilTemp = data.filter(metricData => metricData.metric === 'oilTemp');
         const oilTempName = 'oilTemp';
-        const oilTempColumns = ['time', 'value'];
+        const oilTempColumns = ['time', 'oilTemp'];
         const oilTempPoints = oilTemp[0].measurements.map(measurement => {
             return [measurement.at, measurement.value]
         })
@@ -39,7 +39,7 @@ export default function Chart() {
         //flare temperature section
         const flareTemp = data.filter(metricData => metricData.metric === 'flareTemp');
         const flareTempName = 'flareTemp';
-        const flareTempColumns = ['time', 'value'];
+        const flareTempColumns = ['time', 'flareTemp'];
         const flareTempPoints = flareTemp[0].measurements.map(measurement => {
             return [measurement.at, measurement.value]
         })
@@ -54,7 +54,7 @@ export default function Chart() {
         //water temperature section
         const waterTemp = data.filter(metricData => metricData.metric === 'waterTemp');
         const waterTempName = 'waterTemp';
-        const waterTempColumns = ['time', 'value'];
+        const waterTempColumns = ['time', 'waterTemp'];
         const waterTempPoints = waterTemp[0].measurements.map(measurement => {
             return [measurement.at, measurement.value]
         })
@@ -68,7 +68,7 @@ export default function Chart() {
         //tubing pressure section
         const tubingPressure = data.filter(metricData => metricData.metric === 'tubingPressure');
         const tubingPressureName = 'tubingPressure';
-        const tubingPressureColumns = ['time', 'value'];
+        const tubingPressureColumns = ['time', 'tubingPressure'];
         const tubingPressurePoints = tubingPressure[0].measurements.map(measurement => {
             return [measurement.at, measurement.value]
         })
@@ -84,7 +84,7 @@ export default function Chart() {
         //casing pressure section
         const casingPressure = data.filter(metricData => metricData.metric === 'casingPressure');
         const casingPressureName = 'casingPressure';
-        const casingPressureColumns = ['time', 'value'];
+        const casingPressureColumns = ['time', 'casingPressure'];
         const casingPressurePoints = casingPressure[0].measurements.map(measurement => {
             return [measurement.at, measurement.value]
         })
@@ -100,7 +100,7 @@ export default function Chart() {
         //injection valve section
         const injectionValveOpen = data.filter(metricData => metricData.metric === 'injValveOpen');
         const injectionValveOpenName = 'injValveOpen';
-        const injectionValveOpenColumns = ['time', 'value'];
+        const injectionValveOpenColumns = ['time', 'injValveOpen'];
         const injectionValveOpenPoints = injectionValveOpen[0].measurements.map(measurement => {
             return [measurement.at, measurement.value]
         })
@@ -114,14 +114,14 @@ export default function Chart() {
         injectionValveOpenSeries = new TimeSeries(injectionValveOpenData)
     }
     
-    // const chartStyler = styler([
-    //     {key: 'oilTemp', color: "#f2d974", width: 5},
-    //     {key: 'tubingPressure', color: "#c7956d", width: 5},
-    //     {key: 'casingPressure', color: '#965d62', width: 5},
-    //     {key: 'waterTemp', color: '#534e52', width: 5},
-    //     {key: 'injValveOpen', color: '#999b84', width: 5},
-    //     {key: 'flareTemp', color: '#f4eeed', width: 5}
-    // ]);
+    const chartStyler = styler([
+        {key: 'oilTemp', color: "#f2d974", width: 5},
+        {key: 'tubingPressure', color: "#c7956d", width: 5},
+        {key: 'casingPressure', color: '#965d62', width: 5},
+        {key: 'waterTemp', color: '#534e52', width: 5},
+        {key: 'injValveOpen', color: '#999b84', width: 5},
+        {key: 'flareTemp', color: 'black', width: 5}
+    ]);
 
     return (
         <>
@@ -133,15 +133,27 @@ export default function Chart() {
                     <YAxis id="pressure" label="psi" min={0} max={2000} width="60" type="linear"/>
                     <YAxis id="percentOpen" label="% open" min={0} max={100} width="60" type="linear"/>
                     <Charts>
-                        <LineChart axis="tempF" series={oilTempSeries} column={['oilTemp']} />
-                        <LineChart axis="tempF" series={tempSeries} column={['flareTemp']} />
-                        <LineChart axis="tempF" series={waterTempSeries} column={['waterTemp']} />
-                        <LineChart axis="pressure" series={pressureSeries}  column={['tubingPressure']} />
-                        <LineChart axis="pressure" series={casingPressureSeries} column={['casingPressure']} />
-                        <LineChart axis="percentOpen" series={injectionValveOpenSeries} column={['injValveOpen']} />
+                        <LineChart axis="tempF" series={oilTempSeries} columns={['oilTemp']} style={chartStyler}/>
+                        <LineChart axis="tempF" series={tempSeries} columns={['flareTemp']} style={chartStyler}/>
+                        <LineChart axis="tempF" series={waterTempSeries} columns={['waterTemp']} style={chartStyler}/>
+                        <LineChart axis="pressure" series={pressureSeries}  columns={['tubingPressure']} style={chartStyler}/>
+                        <LineChart axis="pressure" series={casingPressureSeries} columns={['casingPressure']} style={chartStyler}/>
+                        <LineChart axis="percentOpen" series={injectionValveOpenSeries} columns={['injValveOpen']} style={chartStyler}/>
                     </Charts>
                 </ChartRow>
             </ChartContainer>
+            <Legend
+            type="line"
+            align="left"
+            style={chartStyler}
+            categories={[
+                {key: "oilTemp", label: "Oil Temperature"},
+                {key: "flareTemp", label: "Flare Temperature"},
+                {key: "waterTemp", label: "Water Temperature"},
+                {key: "casingPressure", label: "Casing Pressure"},
+                {key: "tubingPressure", label: "Tubing Pressure"},
+                {key: "injValveOpen", label: "Injection Valve Open"},
+            ]} />
             </>
         )}
         </>
